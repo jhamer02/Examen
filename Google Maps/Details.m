@@ -31,6 +31,26 @@ float longitude_;
     //OCMapper
     [OCMapperConfig configure];
     [self initData];
+    
+    
+    
+    mjsonWeatherObject    = [Declarations getWeather:latitude_ and:longitude_];
+    mWeatherObject  = [Parser parseWeatherObject];
+    
+    float tempKelvin        = mWeatherObject.main.temp;
+    float tempCelsius       = tempKelvin - 273.15;
+    self.lblTemp.text       = mWeatherObject.name;
+    self.lblTempMax.text    = [NSString stringWithFormat:@"%.2f", mWeatherObject.main.temp_max - 273.15];
+    self.lblTempMin.text    = [NSString stringWithFormat:@"%.2f", mWeatherObject.main.temp_min - 273.15];
+    self.lblPressure.text   = [NSString stringWithFormat:@"%d", mWeatherObject.main.pressure];
+    self.lblHumidity.text   = [NSString stringWithFormat:@"%d", mWeatherObject.main.humidity];
+    self.icono              = [self.icono stringByAppendingString:@".png"];
+    self.imgWeather.image   = [UIImage imageNamed:self.icono];
+    
+    
+    
+    
+    
 }
 
 - (void)initData {
@@ -41,6 +61,7 @@ float longitude_;
     WeatherDetail *weatherDetail    = [weather getWeatherDetail:0];
     print(NSLog(@"icon %@", weatherDetail.icon))
     print(NSLog(@"Name %@", mWeatherObject.name))
+    self.icono = weatherDetail.icon;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -67,16 +88,6 @@ float longitude_;
 */
 
 - (IBAction)btnGetDataPressed:(id)sender {
-    //mjsonWeatherObject    = [Declarations getWeather:nUagLat and:nUagLng];
-    mjsonWeatherObject    = [Declarations getWeather:latitude_ and:longitude_];
-    mWeatherObject  = [Parser parseWeatherObject];
-    
-    float tempKelvin        = mWeatherObject.main.temp;
-    float tempCelsius       = tempKelvin - 273.15;
-    self.lblTemp.text       = [NSString stringWithFormat:@"%.2f", tempCelsius];
-    self.lblTempMax.text    = [NSString stringWithFormat:@"%.2f", mWeatherObject.main.temp_max - 273.15];
-    self.lblTempMin.text    = [NSString stringWithFormat:@"%.2f", mWeatherObject.main.temp_min - 273.15];
-    self.lblPressure.text   = [NSString stringWithFormat:@"%d", mWeatherObject.main.pressure];
-    self.lblHumidity.text   = [NSString stringWithFormat:@"%d", mWeatherObject.main.humidity];
+
 }
 @end

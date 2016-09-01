@@ -13,6 +13,7 @@
 @interface Details : UIViewController
 @property (nonatomic,strong)    Declarations            *Declarations;
 @property (nonatomic,strong)    Parser                  *Parser;
+@property NSString *icono;
 
 //Objects
 @property (strong, nonatomic) IBOutlet UILabel *lblTemp;
@@ -20,6 +21,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblTempMin;
 @property (strong, nonatomic) IBOutlet UILabel *lblHumidity;
 @property (strong, nonatomic) IBOutlet UILabel *lblPressure;
+@property (strong, nonatomic) IBOutlet UIImageView *imgWeather;
 
 
 //Actions
